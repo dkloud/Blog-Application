@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Blog>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Welcome to the Personal Blog</h2>
+<div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="Create" asp-controller="Blog">Create Blog</a>
+    }
+</div>
+
+<h2>List of Blogs</h2>
+<div class="form-group">
+    <form method="get" asp-controller="Blog" asp-action="FilterByText">
+        <div>
+            <div>Search</div>
+            <div>
+                <input type="text" name="search" class="form-control">
+            </div>
+            <div>
+                <input type="submit" value="Filter" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    @foreach (var blog in Model)
+    {
+        <div> 
+            <dl class="media-middle">
+                <dd>
+                    <a asp-action="Index" asp-controller="BlogArticle" asp-route-id="@blog.Id">
+                        <p><h3>@blog.Name</h3></p>
+                    </a>
+                </dd>
+                <dt>
+                </dt>
+                <dd>
+                    @blog.Description
+                </dd>
+            </dl>
+            <div>
+                <a asp-action="Details" asp-controller="Blog" asp-route-id="@blog.Id">Details</a>
+            </div>
+        </div>
+        <hr /><br />
+    }
+</div>
+

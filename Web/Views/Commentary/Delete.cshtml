@@ -1,0 +1,46 @@
+﻿@model Commentary
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Commentary</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Your commentary
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BlogArticle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BlogArticle.Name)
+        </dd>
+    </dl>
+    
+    <form method="post" asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="BlogArticleId" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Details" asp-controller="BlogArticle" asp-route-id="@Model.BlogArticle.Id">Back to Article</a>
+    </form>
+</div>

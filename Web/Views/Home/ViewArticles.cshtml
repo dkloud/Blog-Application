@@ -1,0 +1,23 @@
+﻿@model IEnumerable<BlogArticle>
+
+@{
+    ViewData["Title"] = "ViewArticles";
+}
+
+<h2>ViewArticles</h2>
+
+<div>
+    @foreach (var blogArticle in Model)
+    {
+    <div>
+        <p>@blogArticle.Name - @blogArticle.CreationDate</p>
+        <p>
+            @foreach (var tag in blogArticle.Tags)
+            {
+                @: @tag.Name + " "
+            }
+        </p>
+        <p><a asp-action="Details" asp-controller="BlogArticle" asp-route-id="@blogArticle.Id">Details</a></p>
+    </div>
+    }
+</div>

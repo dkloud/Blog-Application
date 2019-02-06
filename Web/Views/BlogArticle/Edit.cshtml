@@ -1,0 +1,46 @@
+﻿@model BlogArticle
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>BlogArticle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label"></label>
+                <textarea asp-for="Text" class="form-control"></textarea>
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div>
+                <input type="file" accept="image/*" asp-for="Image"/>
+                <span asp-validation-for="Image"></span>
+            </div>
+            <div class="tags-input" data-name="TagsInput">
+                @foreach (var tag in Model.Tags)
+                {
+                    <span class="tag">@tag.Name</span>
+                }
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="BlogArticle" asp-action="Index" asp-route-id="@Model.BlogId">Back to List</a>
+</div>
+

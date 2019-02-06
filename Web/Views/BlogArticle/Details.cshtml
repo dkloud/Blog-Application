@@ -1,0 +1,102 @@
+﻿@model BlogArticle
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BlogArticle</h4>
+    <hr />
+    <div>
+        @if (BlogHelper.VerifyAuther(Model?.Blog?.User?.Login, User))
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        }
+        <br />
+        <a asp-action="Index" asp-controller="BlogArticle" asp-route-id="@Model.Blog.Id">Back to List</a>
+    </div>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                Author
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Blog.User.Login)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Text)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Text)
+            </dd>
+            <dt>
+                Creation Date
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreationDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Image)
+            </dt>
+            <dd>
+                <img src="@Url.Action("ViewBlogImage", "BlogArticle", new {id = Model.Id})" align="middle" alt="No Image" />
+            </dd>
+            <dt>
+                Tags
+            </dt>
+            <dd>
+                @foreach (var tag in Model.Tags)
+                {
+                    <a asp-controller="BlogArticle" asp-action="FilterByTags" asp-route-tags="@tag.Name">@tag.Name</a>
+                }
+            </dd>
+        </dl>
+    </div>
+</div>
+<hr />
+<br />
+<div class="form-group">
+    <h4 id="commentary-section">Commentaries</h4>
+    <dl class="dl-horizontal">
+        @foreach (var item in Model.Commentaries)
+        {
+            <dt><b>@item.Username</b></dt>
+            <dd>
+                @item.Text
+                @if (BlogHelper.VerifyAuther(item.Username, User))
+                {
+                <div>
+                    <a asp-controller="Commentary" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Commentary" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </div>  
+                }
+            </dd>
+        }
+    </dl>
+</div>
+
+<div>
+    <form method="post" asp-action="Details" asp-controller="BlogArticle">
+        <div class="form-group">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="id" value="@Model.Id" />
+            <div>
+                <textarea id="commentaryId" name="commentary" class="form-control" 
+                          placeholder="Type your commentary here..." 
+                          style="height:100px; width:700px; align-items:center"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Send" class="btn btn-default" />
+        </div>
+    </form>
+</div>

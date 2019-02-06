@@ -1,0 +1,6 @@
+C:\Users\Exia\source\repos\BlogApp\BlogApp\obj\Debug\ApplicationCore.csproj.CoreCompileInputs.cache
+C:\Users\Exia\source\repos\BlogApp\BlogApp\bin\Debug\BlogApp.dll
+C:\Users\Exia\source\repos\BlogApp\BlogApp\bin\Debug\BlogApp.pdb
+C:\Users\Exia\source\repos\BlogApp\BlogApp\obj\Debug\BlogApp.dll
+C:\Users\Exia\source\repos\BlogApp\BlogApp\obj\Debug\BlogApp.pdb
+C:\Users\Exia\source\repos\BlogApp\BlogApp\obj\Debug\ApplicationCore.csprojAssemblyReference.cache
